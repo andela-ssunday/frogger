@@ -1,0 +1,8 @@
+body {
+    text-align: center;
+}
+#score{
+	width:505px;
+	margin:0px auto;
+	border: 1px solid black;
+}
