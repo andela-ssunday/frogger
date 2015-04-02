@@ -18,6 +18,7 @@ Enemy.prototype.update = function(dt) {
         //this.speed = this.speeds[Math.floor((Math.random()*4) + 0)];
         this.x = -50;
         this.y = this.ys[Math.floor((Math.random()*3) + 0)];
+        this.speed+=10;
         //checkLevel();
     }else{
         this.x += (this.speed * dt);
@@ -34,7 +35,6 @@ Enemy.prototype.render = function() {
 
 var Player = function(){
     this.score = 0;
-    this.p_level = 0;
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
@@ -64,7 +64,7 @@ Player.prototype.handleInput = function(key){
             this.x = (this.x<400) ? this.x+100 : this.x;
             break;
         case 'up':
-            this.y = (this.y>0) ? this.y-85 : this.y;
+            this.y = (this.y>0) ? this.y-80 : this.y;
             break;
         case 'down':
             this.y = (this.y<400) ? this.y+80 : this.y;
@@ -80,14 +80,14 @@ Player.prototype.reset = function(){
 
 
 var player = new Player();
-var allEnemies = [];
-var noOfEnemies = 5;
-for(var i=1; i<=noOfEnemies; i++){
-    var enemy = new Enemy();    
-    allEnemies.push(enemy);
-}
 
+var enemy1 = new Enemy();
+var enemy2 = new Enemy();
+var enemy3 = new Enemy();
+var enemy4 = new Enemy();
+var enemy5 = new Enemy();
 
+var allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5];
 var enemy;
 
 
@@ -97,37 +97,15 @@ var checkCollide = function(){
         if((Math.abs(player.x-allEnemies[enemy].x) <=70) && (Math.abs(player.y-allEnemies[enemy].y) <=10)){
             player.reset();
             player.score = (player.score<=10) ? 0 : player.score-10;
-            checkLevel();
-
         }
     }
 };
-var checkSpeed = function(){
-    if( player.level === player.p_level){
-        reduceEnemySpeed();
-    }
-}
+
 var checkLevel = function(){
-    player.level = Math.floor((player.score/20) + 1);
-   console.log("c"+player.level);
-    console.log("p"+player.p_level);
-    if(player.level>player.p_level){
-        addEnemySpeed();
-        player.p_level = player.level;
+    if(player.score>=20){
+        player.level++;
     }
 }
-var addEnemySpeed = function(){
-    for(enemy in allEnemies){
-        allEnemies[enemy].speed+= player.level*20;
-    }
-}
-
-var reduceEnemySpeed = function(){
-    for(enemy in allEnemies){
-        allEnemies[enemy].speed-= player.p_level*20;
-    }    
-}
-
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
