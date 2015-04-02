@@ -64,7 +64,7 @@ Player.prototype.handleInput = function(key){
             this.x = (this.x<400) ? this.x+100 : this.x;
             break;
         case 'up':
-            this.y = (this.y>0) ? this.y-85 : this.y;
+            this.y = (this.y>0) ? this.y-83 : this.y;
             break;
         case 'down':
             this.y = (this.y<400) ? this.y+80 : this.y;
