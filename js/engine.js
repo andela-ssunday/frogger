@@ -166,6 +166,7 @@ var Engine = (function(global) {
     }
 
     function board(){
+        doc.querySelector(".h_score").innerHTML = player.highScore;
         doc.querySelector(".c_score").innerHTML = player.score;
         doc.querySelector(".level").innerHTML = player.level;
     }

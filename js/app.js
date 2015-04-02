@@ -7,7 +7,7 @@ var Enemy = function() {
     //this.speeds = [100,150,200];
     this.y = this.ys[Math.floor((Math.random()*3) + 0)];
     this.speed = Math.floor((Math.random()*200) + 100);
-
+    this.noOfEnemies = 5;
 }
 
 
@@ -34,6 +34,7 @@ Enemy.prototype.render = function() {
 
 var Player = function(){
     this.score = 0;
+    this.highScore = 0;
     this.p_level = 0;
     this.sprite = 'images/char-boy.png';
     this.x = 200;
@@ -45,10 +46,18 @@ var Player = function(){
 Player.prototype.update = function(){
      if(this.y<=50){
         this.score+=10;
+        //this.highScore+=10;
+        checkHighScore();
         this.reset();
         checkLevel();
      }
 
+}
+
+var checkHighScore = function(){
+    if(player.score>player.highScore){
+        player.highScore = player.score;
+    }
 }
 
 Player.prototype.render = function(){
@@ -86,6 +95,7 @@ for(var i=1; i<=noOfEnemies; i++){
     var enemy = new Enemy();    
     allEnemies.push(enemy);
 }
+
 
 
 var enemy;
